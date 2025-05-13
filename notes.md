@@ -11,6 +11,10 @@ The interface for Truffula, this class is for output of the Truffla program from
 
 This is to set the color of the console output, when selected from App.java.
 
+## ColorPrinter.java / ColorPrinterTest.java
+
+ColorPrinter is from applying color to the console output with called by App.java
+
 Objects:
 - currentColor (has a getter/setter method)
 - printStream
@@ -18,10 +22,6 @@ Objects:
 Methods <- All method uses overload
 - print/ln 
 - ColorPrinter
-
-## ColorPrinter.java / ColorPrinterTest.java
-
-First guess, is that it class that called by App.java for use.
 
 ## TruffulaOptions.java / TruffulaOptionsTest.java
 
