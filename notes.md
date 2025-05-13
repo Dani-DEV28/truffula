@@ -27,6 +27,8 @@ Methods <- All method uses overload
 
 ## TruffulaOptions.java / TruffulaOptionsTest.java
 
+ Styles the tree directory option to display hidden files and output with color. It reads command line arguments and checks the correctness of the specified path (throwing exceptions in case of wrong input).
+
 
 
 ## TruffulaPrinter.java / TruffulaPrinterTest.java
