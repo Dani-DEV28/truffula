@@ -5,7 +5,11 @@ PLEASE MAKE FREQUENT COMMITS AS YOU FILL OUT THIS FILE.
 
 ## App.java
 
+The interface for Truffula, this class is for output of the Truffla program from the root directory. Should have option to include hidden files, or colored output
+
 ## ConsoleColor.java
+
+This is to have the console output be colored, when selected from App.java
 
 ## ColorPrinter.java / ColorPrinterTest.java
 
