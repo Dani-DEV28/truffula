@@ -5,7 +5,9 @@ PLEASE MAKE FREQUENT COMMITS AS YOU FILL OUT THIS FILE.
 
 ## App.java
 
-The interface for Truffula, this class is for output of the Truffla program from the root directory. Should have option to include hidden files, or colored output
+~ The interface for Truffula, this class is for output of the Truffla program from the root directory. Should have option to include hidden files, or colored output
+
+~ It processes some command-line arguments to load flags to decide on the handling of hidden files and for colored output, constructs the TruffulaOptions object, and uses it in conjunction with the TruffulaPrinter to output the directory tree.
 
 ## ConsoleColor.java
 
@@ -23,8 +25,15 @@ Methods <- All method uses overload
 - print/ln 
 - ColorPrinter
 
+## ColorPrinter.java / ColorPrinterTest.java
+
 ## TruffulaOptions.java / TruffulaOptionsTest.java
 
+
+
 ## TruffulaPrinter.java / TruffulaPrinterTest.java
+It's able to print the directory tree in optional color and to sort files in case-insensitive order, and also supports hiding hidden files. It outputs using ColorPrinter, emitting colors as it scans in order to clarify visually.
+
+
 
 ## AlphabeticalFileSorter.java
