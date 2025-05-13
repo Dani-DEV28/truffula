@@ -25,8 +25,6 @@ Methods <- All method uses overload
 - print/ln 
 - ColorPrinter
 
-## ColorPrinter.java / ColorPrinterTest.java
-
 ## TruffulaOptions.java / TruffulaOptionsTest.java
 
 
