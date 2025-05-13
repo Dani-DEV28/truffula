@@ -29,11 +29,9 @@ Methods <- All method uses overload
 
  Styles the tree directory option to display hidden files and output with color. It reads command line arguments and checks the correctness of the specified path (throwing exceptions in case of wrong input).
 
-
-
 ## TruffulaPrinter.java / TruffulaPrinterTest.java
 It's able to print the directory tree in optional color and to sort files in case-insensitive order, and also supports hiding hidden files. It outputs using ColorPrinter, emitting colors as it scans in order to clarify visually.
 
-
-
 ## AlphabeticalFileSorter.java
+
+Simply sort file provided by Alphabetic order
