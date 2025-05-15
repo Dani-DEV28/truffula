@@ -85,8 +85,18 @@ public class ColorPrinter {
    * @param message the message to print
    * @param reset   if true, resets the color after printing; if false, keeps the current color
    */
-  public void print(String message, boolean reset) {
+  public void print(String message, boolean reset) { // <- this method is being called the other print and println method
     // TODO: Implement this!
+    // Objects currentColor, and printStream
+    // currentColor can be equal to null, and reset is provide by the user
+    // printStream is the output tool
+    printStream.print(currentColor.toString() + message);
+
+    if(reset){
+      printStream.print(ConsoleColor.RESET.toString());
+    }
+
+    // printStream.print(message); //<- Calling the print method that doesn't have the boolean
   }
 
   /**
