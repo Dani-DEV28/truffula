@@ -26,7 +26,7 @@ class ColorPrinterTest {
     // Assert: Verify the printed output
     assertEquals(expectedOutput, outputStream.toString());
   }
-
+  
 
   @Test
   void testPrintlnWithRedColorAndResetFalse() {
@@ -47,4 +47,39 @@ class ColorPrinterTest {
     // Assert: Verify the printed output
     assertEquals(expectedOutput, outputStream.toString());
   }
+  @Test
+  void testPrintlnWithGreenColorAndReset() {
+    // Arrange
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    PrintStream printStream = new PrintStream(outputStream);
+  
+    ColorPrinter printer = new ColorPrinter(printStream);
+    printer.setCurrentColor(ConsoleColor.GREEN);
+  
+    // Act
+    String message = "Protect nature";
+    printer.println(message);
+  
+    // Assert
+    String expectedOutput = ConsoleColor.GREEN + message + System.lineSeparator() + ConsoleColor.RESET;
+    assertEquals(expectedOutput, outputStream.toString());
+  }
+
+  @Test
+void testPrintlnWithYellowColorAndResetFalse() {
+  // Arrange
+  ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+  PrintStream printStream = new PrintStream(outputStream);
+
+  ColorPrinter printer = new ColorPrinter(printStream);
+  printer.setCurrentColor(ConsoleColor.YELLOW);
+
+  // Act
+  String message = "Sunshine is bright";
+  printer.println(message, false);
+
+  // Assert
+  String expectedOutput = ConsoleColor.YELLOW + message + System.lineSeparator();
+  assertEquals(expectedOutput, outputStream.toString());
+}
 }
