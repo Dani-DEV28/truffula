@@ -82,4 +82,50 @@ void testPrintlnWithYellowColorAndResetFalse() {
   String expectedOutput = ConsoleColor.YELLOW + message + System.lineSeparator();
   assertEquals(expectedOutput, outputStream.toString());
 }
+@Test
+void testPrintWithBlueColorAndResetTrue() {
+  ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+  PrintStream printStream = new PrintStream(outputStream);
+
+  ColorPrinter printer = new ColorPrinter(printStream);
+  printer.setCurrentColor(ConsoleColor.BLUE);
+
+  String message = "Blue ocean";
+  printer.print(message); 
+
+  String expectedOutput = ConsoleColor.BLUE + message + ConsoleColor.RESET;
+  assertEquals(expectedOutput, outputStream.toString());
+}
+
+
+@Test
+void testPrintWithCyanColorAndResetTrue() {
+  ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+  PrintStream printStream = new PrintStream(outputStream);
+
+  ColorPrinter printer = new ColorPrinter(printStream);
+  printer.setCurrentColor(ConsoleColor.CYAN);
+
+  String message = "Cool as cyan";
+  printer.print(message);  
+
+  String expectedOutput = ConsoleColor.CYAN + message + ConsoleColor.RESET;
+  assertEquals(expectedOutput, outputStream.toString());
+}
+
+@Test
+void testPrintlnWithWhiteColorAndNoReset() {
+  ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+  PrintStream printStream = new PrintStream(outputStream);
+
+  ColorPrinter printer = new ColorPrinter(printStream);
+  printer.setCurrentColor(ConsoleColor.WHITE);
+
+  String message = "Neutral white tone";
+  printer.println(message, false);
+
+  String expectedOutput = ConsoleColor.WHITE + message + System.lineSeparator();
+  assertEquals(expectedOutput, outputStream.toString());
+}
+
 }
