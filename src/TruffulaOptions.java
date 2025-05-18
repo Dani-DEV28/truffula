@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
  * - The root directory from which to begin printing the tree.
  * 
  * Hidden files are identified by names that start with a dot (e.g., ".hidden.txt").
- * Color output is enabled by default, but can be disabled using flags.
+ * Color output is enabled  by default, but can be disabled using flags.
  * 
  * Usage Example:
  * 
@@ -102,11 +102,35 @@ public class TruffulaOptions  {
    */
   public TruffulaOptions(String[] args) throws IllegalArgumentException, FileNotFoundException {
     // TODO: Replace the below lines with your implementation
-    root = null;
-    showHidden = false;
-    useColor = false;
+    boolean hidden = false;
+    boolean color = true;
+      if (args.length == 0) {
+          throw new IllegalArgumentException("You must provide a directory path.");
+      }
+  
+      String path = args[args.length - 1];
+  
+      for (int i = 0; i < args.length - 1; i++) {
+          if (args[i].equals("-h")) {
+              hidden = true;
+          } else if (args[i].equals("-nc")) {
+              color = false;
+          } else {
+              throw new IllegalArgumentException("Invalid flag: " + args[i]);
+          }
+      }
+  
+      File folder = new File(path);
+      if (!folder.exists() || !folder.isDirectory()) {
+          throw new FileNotFoundException("The folder doesn't exist: " + path);
+      }
+  
+      this.root = folder;
+      this.showHidden = hidden;
+      this.useColor = color;
   }
-
+  
+  
   /**
    * Constructs a TruffulaOptions object with explicit values.
    * 
