@@ -30,6 +30,7 @@ class ColorPrinterTest {
 
   @Test
   void testPrintlnWithRedColorAndResetFalse() {
+    //  // Test: println in RED without reset
     // Arrange: Capture the printed output
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     PrintStream printStream = new PrintStream(outputStream);
@@ -49,6 +50,7 @@ class ColorPrinterTest {
   }
   @Test
   void testPrintlnWithGreenColorAndReset() {
+      // Test: println in GREEN with reset
     // Arrange
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     PrintStream printStream = new PrintStream(outputStream);
@@ -67,6 +69,7 @@ class ColorPrinterTest {
 
   @Test
 void testPrintlnWithYellowColorAndResetFalse() {
+    // Test: println in YELLOW without reset
   // Arrange
   ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
   PrintStream printStream = new PrintStream(outputStream);
@@ -84,6 +87,7 @@ void testPrintlnWithYellowColorAndResetFalse() {
 }
 @Test
 void testPrintWithBlueColorAndResetTrue() {
+    // Test: print in BLUE with reset
   ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
   PrintStream printStream = new PrintStream(outputStream);
 
@@ -100,6 +104,7 @@ void testPrintWithBlueColorAndResetTrue() {
 
 @Test
 void testPrintWithCyanColorAndResetTrue() {
+    // Test: print in CYAN with reset
   ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
   PrintStream printStream = new PrintStream(outputStream);
 
@@ -115,6 +120,7 @@ void testPrintWithCyanColorAndResetTrue() {
 
 @Test
 void testPrintlnWithWhiteColorAndNoReset() {
+    // Test: println in WHITE without reset
   ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
   PrintStream printStream = new PrintStream(outputStream);
 
