@@ -61,9 +61,7 @@ public class TruffulaOptionsTest {
     String[] args = {"-nc", directory.getAbsolutePath()};
 
     TruffulaOptions options = new TruffulaOptions(args);
-
-
-    assertEquals(directory.getAbsolutePath(), options.getRoot().getAbsolutePath());
+   assertEquals(directory.getAbsolutePath(), options.getRoot().getAbsolutePath());
     assertFalse(options.isShowHidden());
     assertFalse(options.isUseColor());
   }
