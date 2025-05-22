@@ -40,6 +40,17 @@ public class TruffulaOptionsTest {
   }
 
   @Test
+  void testMissingFolder() throws FileNotFoundException {
+    // Arrange: Prepare the arguments with the temp directory
+    String[] args = {};
+
+
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new TruffulaOptions(args));
+
+    assertEquals("Missing folder path.", exception.getMessage());
+  }
+
+  @Test
   void testWithNoFlags_UsesDefaults(@TempDir File tempDir) throws FileNotFoundException {
     // Test: no flags ... hide hidden files, use color
     File directory = new File(tempDir, "subfolder");
