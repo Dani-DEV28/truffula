@@ -88,6 +88,9 @@ public class TruffulaOptionsTest {
    assertEquals(directory.getAbsolutePath(), options.getRoot().getAbsolutePath());
     assertFalse(options.isShowHidden());
     assertFalse(options.isUseColor());
+
   }
+    
+  
 }
  
