@@ -48,5 +48,6 @@ public class App {
     TruffulaOptions options = new TruffulaOptions(args);
     TruffulaPrinter printColor = new TruffulaPrinter(options);
 
+
   }
 }
