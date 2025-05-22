@@ -107,31 +107,31 @@ public class TruffulaOptions  {
     // Parses flags, checks folder, sets display options...... in the code 
     boolean show = false;
     boolean color = true;
-      if (args.length == 0) {
-          throw new IllegalArgumentException("Missing folder path.");
+    if (args.length == 0) {
+      throw new IllegalArgumentException("Missing folder path.");
+    }
+  
+    String folderpath = args[args.length - 1];
+
+    File folder = new File(folderpath);
+    if (!folder.exists() || !folder.isDirectory()) {
+      throw new FileNotFoundException("The folder doesn't exist: " + folderpath);
+    }
+  
+    for (int i = 0; i < args.length - 1; i++) {
+      String option = args[i];
+      if (option.equals("-h")) {
+        show = true;
+      } else if (option.equals("-nc")){
+        color = false;
+      } else {
+        throw new IllegalArgumentException("Unknown option: " + args[i]);
       }
+    }
   
-      String folderpath = args[args.length - 1];
-  
-      for (int i = 0; i < args.length - 1; i++) {
-        String option = args[i];
-        if (option.equals("-h")) {
-              show = true;
-          } else if (option.equals("-nc")){
-              color = false;
-          } else {
-              throw new IllegalArgumentException("Unknown option: " + args[i]);
-          }
-      }
-  
-      File folder = new File(folderpath);
-      if (!folder.exists() || !folder.isDirectory()) {
-          throw new FileNotFoundException("The folder doesn't exist: " + folderpath);
-      }
-  
-      this.root = folder;
-      this.showHidden = show;
-      this.useColor = color;
+    this.root = folder;
+    this.showHidden = show;
+    this.useColor = color;
   }
   
   
