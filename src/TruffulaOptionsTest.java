@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
@@ -26,6 +27,18 @@ public class TruffulaOptionsTest {
     assertTrue(options.isShowHidden());
     assertFalse(options.isUseColor());
   }
+
+  @Test
+  void testFakePath(@TempDir File tempDir) throws FileNotFoundException {
+    // Arrange: Prepare the arguments with the temp directory
+    String[] args = {"-nc", "-h", "some/nonexistent/path"};
+
+
+    FileNotFoundException exception = assertThrows(FileNotFoundException.class, () -> new TruffulaOptions(args));
+
+    assertEquals("The folder doesn't exist: " + "some/nonexistent/path", exception.getMessage());
+  }
+
   @Test
   void testWithNoFlags_UsesDefaults(@TempDir File tempDir) throws FileNotFoundException {
     // Test: no flags ... hide hidden files, use color
