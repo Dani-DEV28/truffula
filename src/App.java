@@ -40,6 +40,7 @@ public class App {
    * 
    * Error messages will be shown for illegal arguments or a not found file
    */
+
   public static void main(String[] args) throws Exception {
     // TODO: Implement this
     // You should create a TruffulaOptions object using the args and
@@ -48,6 +49,6 @@ public class App {
     TruffulaOptions options = new TruffulaOptions(args);
     TruffulaPrinter printColor = new TruffulaPrinter(options);
 
-
+    printColor.printTree();
   }
 }
