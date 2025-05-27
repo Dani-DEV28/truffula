@@ -135,6 +135,14 @@ public class TruffulaPrinter {
     if(files == null) return;
 
     for(File file: files){
+      if(!options.isShowHidden() && file.isHidden()){
+        continue;
+      }
+
+      if(options.isUseColor()){
+        
+      }
+
       if(file.isDirectory()){
         out.println("    ".repeat(depth + 1) + file.getName() + "/");
         printTree(file, depth+1);
