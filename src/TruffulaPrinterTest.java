@@ -145,8 +145,10 @@ public class TruffulaPrinterTest {
         expected.append(yellow).append("      notes.txt").append(nl).append(reset);
         expected.append(yellow).append("      README.md").append(nl).append(reset);
         expected.append(purple).append("   zebra.txt").append(nl).append(reset);
+        // expected.append(nl);
 
         // Assert that the output matches the expected output exactly
         assertEquals(expected.toString(), output);
     }
+    
 }

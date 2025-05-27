@@ -119,12 +119,15 @@ public class TruffulaPrinter {
 
     if(root == null || !root.exists() || !root.isDirectory()){
       out.println("Directory Not FOUND");
+      return;
     }
 
-    printTree(root, 0);
+    out.println(colorSequence.get(0) + root.getName() + "/"+ ConsoleColor.RESET);
 
-    out.println("printTree was called!");
-    out.println("My options are: " + options);
+    printTree(root, 1);
+
+    // out.println("printTree was called!");
+    // out.println("My options are: " + options);
   }
 
   public void printTree(File dir, int depth) {
@@ -134,21 +137,29 @@ public class TruffulaPrinter {
     
     if(files == null) return;
 
+    AlphabeticalFileSorter.sort(files);
+
     for(File file: files){
       if(!options.isShowHidden() && file.isHidden()){
         continue;
       }
 
       if(options.isUseColor()){
-        
-      }
-
-      if(file.isDirectory()){
-        out.println("    ".repeat(depth + 1) + file.getName() + "/");
-        printTree(file, depth+1);
+        ConsoleColor color = colorSequence.get((depth) % colorSequence.size());
+        if(file.isDirectory()){
+          out.println(color + "   ".repeat(depth + 1) + file.getName() + "/" + ConsoleColor.RESET);
+          printTree(file, depth+1);
+        }else if(options.isUseColor()){
+          out.println(color + "   ".repeat(depth + 1) + file.getName() + ConsoleColor.RESET);
+        }
       }else {
-        out.println("    ".repeat(depth+1) + file.getName());;
-      }
+        if(file.isDirectory()){
+          out.println("   ".repeat(depth + 1) + file.getName() + "/" + ConsoleColor.RESET);
+          printTree(file, depth+1);
+        }else{
+          out.println("   ".repeat(depth + 1) + file.getName() + ConsoleColor.RESET);
+        }
+      }  
     }
   }
 
