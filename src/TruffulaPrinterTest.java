@@ -245,6 +245,36 @@ public void testPrintTree_ShowsHiddenFiles_WhenEnabled(@TempDir File tempDir) th
 
     assertEquals(expected.toString(), output.toString());
 }
- 
+
+
+@Test
+public void testPrintTree_NestedDirectory(@TempDir File tempDir) throws IOException {
+    File root = new File(tempDir, "root");
+    assertTrue(root.mkdir());
+
+    File sub = new File(root, "subdir");
+    assertTrue(sub.mkdir());
+
+    new File(sub, "file.txt").createNewFile();
+// Test nested directory structure
+    TruffulaOptions options = new TruffulaOptions(root, false, false);
+    ByteArrayOutputStream output = new ByteArrayOutputStream();
+    PrintStream printStream = new PrintStream(output);
+
+    TruffulaPrinter printer = new TruffulaPrinter(options, printStream);
+    printer.printTree();
+
+    String nl = System.lineSeparator();
+    StringBuilder expected = new StringBuilder();
+    expected.append(ConsoleColor.WHITE).append(ConsoleColor.WHITE).append("root/").append(nl);
+    expected.append(ConsoleColor.RESET).append(ConsoleColor.WHITE).append("   subdir/").append(ConsoleColor.RESET).append(nl);
+    expected.append(ConsoleColor.RESET).append(ConsoleColor.WHITE).append("      file.txt").append(ConsoleColor.RESET).append(nl);
+    expected.append(ConsoleColor.RESET);
+
+    assertEquals(expected.toString(), output.toString());
+}
+
+
+
 
 }
