@@ -124,7 +124,7 @@ public class TruffulaPrinter {
 
     out.println(colorSequence.get(0) + root.getName() + "/"+ ConsoleColor.RESET);
 
-    printTree(root, 1);
+    printTree(root, 0);
 
     // out.println("printTree was called!");
     // out.println("My options are: " + options);
@@ -145,7 +145,7 @@ public class TruffulaPrinter {
       }
 
       if(options.isUseColor()){
-        ConsoleColor color = colorSequence.get((depth) % colorSequence.size());
+        ConsoleColor color = colorSequence.get((depth+1) % colorSequence.size());
         if(file.isDirectory()){
           out.println(color + "   ".repeat(depth + 1) + file.getName() + "/" + ConsoleColor.RESET);
           printTree(file, depth+1);
