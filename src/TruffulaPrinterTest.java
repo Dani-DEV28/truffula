@@ -135,16 +135,16 @@ public class TruffulaPrinterTest {
         ConsoleColor yellow = ConsoleColor.YELLOW;
 
         StringBuilder expected = new StringBuilder();
-        expected.append(white).append("myFolder/").append(nl).append(reset);
-        expected.append(purple).append("   Apple.txt").append(nl).append(reset);
-        expected.append(purple).append("   banana.txt").append(nl).append(reset);
-        expected.append(purple).append("   Documents/").append(nl).append(reset);
-        expected.append(yellow).append("      images/").append(nl).append(reset);
-        expected.append(white).append("         cat.png").append(nl).append(reset);
-        expected.append(white).append("         Dog.png").append(nl).append(reset);
-        expected.append(yellow).append("      notes.txt").append(nl).append(reset);
-        expected.append(yellow).append("      README.md").append(nl).append(reset);
-        expected.append(purple).append("   zebra.txt").append(nl).append(reset);
+        expected.append(white).append(white).append("myFolder/").append(nl).append(reset);
+        expected.append(white).append(purple).append("   Apple.txt").append(reset).append(nl).append(reset);
+        expected.append(white).append(purple).append("   banana.txt").append(reset).append(nl).append(reset);
+        expected.append(white).append(purple).append("   Documents/").append(reset).append(nl).append(reset);
+        expected.append(white).append(yellow).append("      images/").append(reset).append(nl).append(reset);
+        expected.append(white).append(white).append("         cat.png").append(reset).append(nl).append(reset);
+        expected.append(white).append(white).append("         Dog.png").append(reset).append(nl).append(reset);
+        expected.append(white).append(yellow).append("      notes.txt").append(reset).append(nl).append(reset);
+        expected.append(white).append(yellow).append("      README.md").append(reset).append(nl).append(reset);
+        expected.append(white).append(purple).append("   zebra.txt").append(reset).append(nl).append(reset);
         // expected.append(nl);
 
         // Assert that the output matches the expected output exactly
