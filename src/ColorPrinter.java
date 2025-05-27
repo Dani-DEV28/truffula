@@ -90,10 +90,10 @@ public class ColorPrinter {
     // Objects currentColor, and printStream
     // currentColor can be equal to null, and reset is provide by the user
     // printStream is the output tool
-    printStream.print(currentColor.toString() + message);
+    printStream.print(currentColor + message);
 
     if(reset){
-      printStream.print(ConsoleColor.RESET.toString());
+      printStream.print(ConsoleColor.RESET);
     }
 
     // printStream.print(message); //<- Calling the print method that doesn't have the boolean
