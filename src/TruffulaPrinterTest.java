@@ -187,29 +187,55 @@ public class TruffulaPrinterTest {
         // Use options with showHidden = false and useColor = false
         TruffulaOptions options = new TruffulaOptions(myFolder, false, false);
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream printStream = new PrintStream(baos);
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(output);
 
         TruffulaPrinter printer = new TruffulaPrinter(options, printStream);
         printer.printTree();
 
-        String output = baos.toString();
+        // String  = baos.toString();
         String nl = System.lineSeparator();
 
         StringBuilder expected = new StringBuilder();
-        expected.append("myFolder/").append(nl);
-        expected.append("   Apple.txt").append(nl);
-        expected.append("   banana.txt").append(nl);
-        expected.append("   Documents/").append(nl);
-        expected.append("      images/").append(nl);
-        expected.append("         cat.png").append(nl);
-        expected.append("         Dog.png").append(nl);
-        expected.append("      notes.txt").append(nl);
-        expected.append("      README.md").append(nl);
-        expected.append("   zebra.txt").append(nl);
+        expected.append(ConsoleColor.WHITE).append(ConsoleColor.WHITE).append("myFolder/").append(nl);
+        expected.append(ConsoleColor.RESET).append(ConsoleColor.WHITE).append("   Apple.txt").append(ConsoleColor.RESET).append(nl);
+        expected.append(ConsoleColor.RESET).append(ConsoleColor.WHITE).append("   banana.txt").append(ConsoleColor.RESET).append(nl);
+        expected.append(ConsoleColor.RESET).append(ConsoleColor.WHITE).append("   Documents/").append(ConsoleColor.RESET).append(nl);
+        expected.append(ConsoleColor.RESET).append(ConsoleColor.WHITE).append("      images/").append(ConsoleColor.RESET).append(nl);
+        expected.append(ConsoleColor.RESET).append(ConsoleColor.WHITE).append("         cat.png").append(ConsoleColor.RESET).append(nl);
+        expected.append(ConsoleColor.RESET).append(ConsoleColor.WHITE).append("         Dog.png").append(ConsoleColor.RESET).append(nl);
+        expected.append(ConsoleColor.RESET).append(ConsoleColor.WHITE).append("      notes.txt").append(ConsoleColor.RESET).append(nl);
+        expected.append(ConsoleColor.RESET).append(ConsoleColor.WHITE).append("      README.md").append(ConsoleColor.RESET).append(nl);
+        expected.append(ConsoleColor.RESET).append(ConsoleColor.WHITE).append("   zebra.txt").append(ConsoleColor.RESET).append(nl);
+        expected.append(ConsoleColor.RESET);
 
-        assertEquals(expected.toString(), output);
+        assertEquals(expected.toString(), output.toString());
     }
 
+    @Test
+    public void testPrintTree_ExactOutput_RootMatch(@TempDir File tempDir) throws IOException {
+        // Create directory structure:
+        // myFolder/
 
+        File myFolder = new File(tempDir, "myFolder");
+        assertTrue(myFolder.mkdir(), "myFolder should be created");
+
+        // Use options with showHidden = false and useColor = false
+        TruffulaOptions options = new TruffulaOptions(myFolder, false, false);
+
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(output);
+
+        TruffulaPrinter printer = new TruffulaPrinter(options, printStream);
+        printer.printTree();
+
+        // String  = baos.toString();
+        String nl = System.lineSeparator();
+
+        StringBuilder expected = new StringBuilder();
+        expected.append(ConsoleColor.WHITE).append(ConsoleColor.WHITE).append("myFolder/").append(nl);
+        expected.append(ConsoleColor.RESET);
+
+        assertEquals(expected.toString(), output.toString());
+    }
 }

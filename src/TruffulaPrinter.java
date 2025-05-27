@@ -122,7 +122,7 @@ public class TruffulaPrinter {
       return;
     }
 
-    out.println(colorSequence.get(0) + root.getName() + "/"+ ConsoleColor.RESET);
+    out.println(colorSequence.get(0) + (root.getName().toString() + "/"));
 
     printTree(root, 0);
 
@@ -144,20 +144,23 @@ public class TruffulaPrinter {
         continue;
       }
 
+      String fixIssues = ("   ".repeat(depth + 1) + file.getName());
+      String fixIssuesDir = ("   ".repeat(depth + 1) + file.getName()+ "/");
+
       if(options.isUseColor()){
         ConsoleColor color = colorSequence.get((depth+1) % colorSequence.size());
         if(file.isDirectory()){
-          out.println(color + "   ".repeat(depth + 1) + file.getName() + "/" + ConsoleColor.RESET);
+          out.println(color.toString() + fixIssuesDir + ConsoleColor.RESET);
           printTree(file, depth+1);
         }else if(options.isUseColor()){
-          out.println(color + "   ".repeat(depth + 1) + file.getName() + ConsoleColor.RESET);
+          out.println(color.toString() + fixIssues + ConsoleColor.RESET);
         }
       }else {
         if(file.isDirectory()){
-          out.println("   ".repeat(depth + 1) + file.getName() + "/" + ConsoleColor.RESET);
+          out.println(fixIssuesDir + ConsoleColor.RESET);
           printTree(file, depth+1);
         }else{
-          out.println("   ".repeat(depth + 1) + file.getName() + ConsoleColor.RESET);
+          out.println(fixIssues + ConsoleColor.RESET);
         }
       }  
     }
