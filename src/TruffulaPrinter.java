@@ -136,6 +136,7 @@ public class TruffulaPrinter {
 
     for(File file: files){
       if(file.isDirectory()){
+        out.println("    ".repeat(depth + 1) + file.getName() + "/");
         printTree(file, depth+1);
       }else {
         out.println("    ".repeat(depth+1) + file.getName());;
