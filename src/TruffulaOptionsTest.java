@@ -90,7 +90,47 @@ public class TruffulaOptionsTest {
     assertFalse(options.isUseColor());
 
   }
-    
+
+  @Test
+void testWithMixedValidAndInvalidFlag(@TempDir File tempDir) throws FileNotFoundException {
+  File directory = new File(tempDir, "subfolder");
+  directory.mkdir();
+  String directoryPath = directory.getAbsolutePath();
+  String[] args = {"-h", "-wrong", directoryPath};
+
+  // Assert
+  assertThrows(IllegalArgumentException.class, () -> {
+    new TruffulaOptions(args);
+  });
+}
+
+@Test
+void testWithMultiplePathsGiven(@TempDir File tempDir) throws FileNotFoundException {
+  File folder1 = new File(tempDir, "folder1");
+  File folder2 = new File(tempDir, "folder2");
+  folder1.mkdir();
+  folder2.mkdir();
+
+  String[] args = {"-h", folder1.getAbsolutePath(), folder2.getAbsolutePath()};
+
+  // Assert
+  assertThrows(IllegalArgumentException.class, () -> {
+    new TruffulaOptions(args);
+  });
+}
+
+@Test
+void testWithFlagThatHasExtraSpace(@TempDir File tempDir) throws FileNotFoundException {
+  File directory = new File(tempDir, "subfolder");
+  directory.mkdir();
+  String directoryPath = directory.getAbsolutePath();
+  String[] args = {" -h", directoryPath}; 
+
+  // Assert
+  assertThrows(IllegalArgumentException.class, () -> {
+    new TruffulaOptions(args);
+  });
+}
   
 }
  
