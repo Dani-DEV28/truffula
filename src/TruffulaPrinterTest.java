@@ -213,29 +213,38 @@ public class TruffulaPrinterTest {
     }
 
     @Test
-    public void testPrintTree_ExactOutput_RootMatch(@TempDir File tempDir) throws IOException {
-        // Create directory structure:
-        // myFolder/
+public void testPrintTree_ShowsHiddenFiles_WhenEnabled(@TempDir File tempDir) throws IOException {
+    // myFolder/
+    //    .hidden.txt
+    //    Apple.txt
 
-        File myFolder = new File(tempDir, "myFolder");
-        assertTrue(myFolder.mkdir(), "myFolder should be created");
+    File myFolder = new File(tempDir, "myFolder");
+    assertTrue(myFolder.mkdir(), "Folder should be created");
 
-        // Use options with showHidden = false and useColor = false
-        TruffulaOptions options = new TruffulaOptions(myFolder, false, false);
+    File apple = new File(myFolder, "Apple.txt");
+    apple.createNewFile();
 
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        PrintStream printStream = new PrintStream(output);
+    createHiddenFile(myFolder, ".hidden.txt");
 
-        TruffulaPrinter printer = new TruffulaPrinter(options, printStream);
-        printer.printTree();
 
-        // String  = baos.toString();
-        String nl = System.lineSeparator();
+   // Verifies that hidden files are printed when showHidden = true
+    TruffulaOptions options = new TruffulaOptions(myFolder, true, false);
 
-        StringBuilder expected = new StringBuilder();
-        expected.append(ConsoleColor.WHITE).append(ConsoleColor.WHITE).append("myFolder/").append(nl);
-        expected.append(ConsoleColor.RESET);
+    ByteArrayOutputStream output = new ByteArrayOutputStream();
+    PrintStream printStream = new PrintStream(output);
 
-        assertEquals(expected.toString(), output.toString());
-    }
+    TruffulaPrinter printer = new TruffulaPrinter(options, printStream);
+    printer.printTree();
+
+    String nl = System.lineSeparator();
+    StringBuilder expected = new StringBuilder();
+    expected.append(ConsoleColor.WHITE).append(ConsoleColor.WHITE).append("myFolder/").append(nl);
+    expected.append(ConsoleColor.RESET).append(ConsoleColor.WHITE).append("   .hidden.txt").append(ConsoleColor.RESET).append(nl);
+    expected.append(ConsoleColor.RESET).append(ConsoleColor.WHITE).append("   Apple.txt").append(ConsoleColor.RESET).append(nl);
+    expected.append(ConsoleColor.RESET);
+
+    assertEquals(expected.toString(), output.toString());
+}
+ 
+
 }
