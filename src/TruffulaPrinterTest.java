@@ -275,6 +275,68 @@ public void testPrintTree_NestedDirectory(@TempDir File tempDir) throws IOExcept
 }
 
 
+@Test
+public void testPrintTree_EmptyFolder(@TempDir File tempDir) {
+    //  empty folder..... should only print root folder name
+    File empty = new File(tempDir, "emptyFolder");
+    assertTrue(empty.mkdir());
 
+    TruffulaOptions options = new TruffulaOptions(empty, false, false);
+    ByteArrayOutputStream output = new ByteArrayOutputStream();
+    TruffulaPrinter printer = new TruffulaPrinter(options, new PrintStream(output));
+
+    printer.printTree();
+
+    String nl = System.lineSeparator();
+    StringBuilder expected = new StringBuilder();
+    expected.append(ConsoleColor.WHITE).append(ConsoleColor.WHITE).append("emptyFolder/").append(nl);
+    expected.append(ConsoleColor.RESET);
+
+    assertEquals(expected.toString(), output.toString());
+}
+
+@Test
+public void testPrintTree_HiddenFolderSkipped_WhenHiddenFalse(@TempDir File tempDir) throws IOException {
+    // hidden folder is skipped when showHidden = false
+    File parent = new File(tempDir, "parent");
+    assertTrue(parent.mkdir());
+    createHiddenFile(parent, ".secretFolder");
+
+    TruffulaOptions options = new TruffulaOptions(parent, false, false);
+    ByteArrayOutputStream output = new ByteArrayOutputStream();
+    TruffulaPrinter printer = new TruffulaPrinter(options, new PrintStream(output));
+    printer.printTree();
+
+    String nl = System.lineSeparator();
+    StringBuilder expected = new StringBuilder();
+    expected.append(ConsoleColor.WHITE).append(ConsoleColor.WHITE).append("parent/").append(nl);
+    expected.append(ConsoleColor.RESET);
+
+    assertEquals(expected.toString(), output.toString());
+}
+
+
+@Test
+public void testPrintTree_FileNamesWithSpacesAndSymbols(@TempDir File tempDir) throws IOException {
+    // filenames with spaces and special characters
+    File folder = new File(tempDir, "specials");
+    assertTrue(folder.mkdir());
+    new File(folder, "hello everyone.txt").createNewFile();
+    new File(folder, "@doName$.csv").createNewFile();
+
+    TruffulaOptions options = new TruffulaOptions(folder, false, false);
+    ByteArrayOutputStream output = new ByteArrayOutputStream();
+    TruffulaPrinter printer = new TruffulaPrinter(options, new PrintStream(output));
+    printer.printTree();
+
+    String nl = System.lineSeparator();
+    StringBuilder expected = new StringBuilder();
+    expected.append(ConsoleColor.WHITE).append(ConsoleColor.WHITE).append("specials/").append(nl);
+    expected.append(ConsoleColor.RESET).append(ConsoleColor.WHITE).append("   @doName$.csv").append(ConsoleColor.RESET).append(nl);
+    expected.append(ConsoleColor.RESET).append(ConsoleColor.WHITE).append("   hello everyone.txt").append(ConsoleColor.RESET).append(nl);
+    expected.append(ConsoleColor.RESET);
+
+    assertEquals(expected.toString(), output.toString());
+}
 
 }
